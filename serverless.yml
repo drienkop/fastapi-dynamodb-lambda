@@ -1,0 +1,30 @@
+service: kiteapi
+
+frameworkVersion: "2"
+
+provider:
+  name: aws
+  stage: ${opt:stage}
+  region: eu-central-1
+  lambdaHashingVersion: 20201221
+  memorySize: 256
+  apiName: ${self:service}-${opt:stage}
+  apiGateway:
+    description: Kite spots REST API ${self:service}
+    metrics: true
+  iamRoleStatements: 
+    - Effect: Allow
+      Action:
+        - dynamodb:GetItem
+      Resource: "arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/kite_spots"
+  httpApi:
+    authorizers:
+      auth0:
+        type: jwt
+        identitySource: $request.header.Authorization
+        issuerUrl: https://<tenant_name>.eu.auth0.com/ # change_me
+        audience:
+          - https://<tenant_name>.eu.auth0.com/api/v2/ # change_me
+
+
+functions: ${file(functions.yml):functions}

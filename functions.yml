@@ -1,0 +1,15 @@
+functions:
+  kiteApi:
+    image: <image>@<hash>
+    events:
+      - httpApi:
+          path: /
+          method: get
+          authorizer:
+            name: auth0
+      - httpApi:
+          path: /spots/{id}
+          method: get
+          authorizer:
+            name: auth0
+

@@ -1,0 +1,11 @@
+version: "3.8"
+
+services:
+  kite-prod:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    image: <account_id>.dkr.ecr.eu-central-1.amazonaws.com/kite-api:latest # change_me
+    container_name: kite-prod
+    ports:
+      - 9000:8080
