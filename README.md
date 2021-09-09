@@ -1,5 +1,6 @@
 # FastAPI with DynamoDB deployed via AWS ECR to AWS Lambda 
 - with JWT/OAuth2 authorizer
+
 ## Requirements
 - serverless
 - docker
